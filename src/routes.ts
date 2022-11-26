@@ -1,9 +1,13 @@
 import { Router } from 'express';
+import NewsController from './controllers/newsController';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.json({version: '0.0.1'})
-});
+router.get('/news', NewsController.getAll);
+router.get('/news/:id', NewsController.getById);
+router.post('/news', NewsController.create);
+router.put('/news/:id', NewsController.update);
+router.delete('/news/:id', NewsController.delete);
+
 
 export default router;
