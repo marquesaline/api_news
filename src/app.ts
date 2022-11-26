@@ -46,7 +46,7 @@ class App {
             next();
         });
         
-        this.app.use('/', router);
+        this.app.use('/api-news', router);
     }
 
     public async start() {
