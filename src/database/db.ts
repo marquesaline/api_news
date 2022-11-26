@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
+import { DB_URL } from '../config/env';
 
 class Database {
-    private DB_URL = 'mongodb://localhost:27017/db_portal'
+    private DB_URL_MOONGO = DB_URL;
 
     createConnection(){
-        mongoose.connect(this.DB_URL);
+        mongoose.connect(this.DB_URL_MOONGO);
     }
 }
 
