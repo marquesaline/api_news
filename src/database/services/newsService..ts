@@ -48,4 +48,4 @@ class NewsServices {
     }
 }
 
-export default NewsServices;
+export default new NewsServices;
