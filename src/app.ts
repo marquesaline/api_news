@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 import swaggerUi from 'swagger-ui-express';
 import router from './routes';
+import Database from './database/db';
 
 // const swaggerFile = require('../swagger_output.json');
 
@@ -12,9 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 class App {
     public app: express.Application;
+    private _db: Database;
 
     constructor() {
         this.app = express();
+        this._db = new Database();
+        this._db.createConnection();
         // this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
         this.app.use(express.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,16 +26,16 @@ class App {
         this.app.use(methodOverride('_method'));
         this.app.use(cookieParser());
         this.app.use(cors({
-        allowedHeaders: [
-            "Origin",
-            "X-Requested-With",
-            "Content-Type",
-            "Accept",
-            "X-Access-Token",
-        ],
-        origin: true,
-        credentials: true,
-        preflightContinue: false,
+            allowedHeaders: [
+                "Origin",
+                "X-Requested-With",
+                "Content-Type",
+                "Accept",
+                "X-Access-Token",
+            ],
+            origin: true,
+            credentials: true,
+            preflightContinue: false,
         }));
         this.app.use(function(_req, res, next){
             res.setHeader("Access-Control-Allow-Origin", "*");
@@ -47,7 +51,6 @@ class App {
 
     public async start() {
         try {
-            // await db_connection.sync();
             this.app.listen(PORT, () => {
               console.log("Server started on port 3000");
             });
