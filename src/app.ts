@@ -46,13 +46,13 @@ class App {
             next();
         });
         
-        this.app.use('/api-news', router);
+        this.app.use('/', router);
     }
 
     public async start() {
         try {
             this.app.listen(PORT, () => {
-              console.log("Server started on port 3000");
+              console.log(`Server started on port ${PORT}`);
             });
         } catch (error) {
             console.error(error);
