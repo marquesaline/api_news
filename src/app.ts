@@ -7,8 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import router from './routes';
 import Database from './database/db';
 
-// const swaggerFile = require('../swagger_output.json');
-
+const swaggerFile = require('../swagger_output.json');
 const PORT = process.env.PORT || 3000;
 
 class App {
@@ -19,7 +18,7 @@ class App {
         this.app = express();
         this._db = new Database();
         this._db.createConnection();
-        // this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+        this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
         this.app.use(express.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
