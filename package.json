@@ -7,7 +7,7 @@
     "compile": "tsc -w",
     "build": "tsc",
     "dev": "nodemon ./src/server.ts",
-    "start": "node server.js",
+    "start": "node ./dist/server.js",
     "test": "mocha --exit"
   },
   "repository": {
