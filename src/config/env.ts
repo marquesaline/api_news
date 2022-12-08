@@ -1,3 +1,8 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 
-export const DB_URL: string = process.env.DB_URL_ENV ?? '';
+dotenv.config();
+
+export const DB_URL_LOCAL: string = process.env.DB_URL_LOCALHOST ?? '';
+
+
+export const DB_URL: string = process.env.DB_URL_CONTAINER ?? '';
