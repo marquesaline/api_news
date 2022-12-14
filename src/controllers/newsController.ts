@@ -5,10 +5,6 @@ import Helper from '../utils/helper';
 
 class NewsController {
 
-    sendResponse = (res: Response, statusCode: any, data?: any, message?: string) => {
-        res.status(statusCode).json({message: message, result: data});
-    }
-
     async getAll(req: Request, res: Response) {
         NewsServices.getAll()
             .then(news => Helper.sendResponse(res, StatusCodes.OK, news))
@@ -29,6 +25,15 @@ class NewsController {
         NewsServices.create(newNews)
             .then(news => Helper.sendResponse(res, StatusCodes.CREATED, news, 'Notícia cadastrada com sucesso!'))
             .catch(error => Helper.sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error));
+    }
+
+    async uploadImage(req: Request, res: Response) {
+
+        try {
+            res.status(200).json({message: 'Arquivo enviado com sucesso'});
+        } catch(error) {
+            res.status(500).json({error: error});
+        }
     }
 
     async update(req: Request, res: Response) {
