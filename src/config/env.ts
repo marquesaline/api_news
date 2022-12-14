@@ -4,5 +4,6 @@ dotenv.config();
 
 export const DB_URL_LOCAL: string = process.env.DB_URL_LOCALHOST ?? '';
 
-
 export const DB_URL: string = process.env.DB_URL_CONTAINER ?? '';
+
+export const SECRET_AUTH = process.env.SECRET ?? '';
