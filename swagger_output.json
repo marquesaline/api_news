@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "REST API",
-    "description": ""
+    "description": "Documentação da API"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -13,31 +13,210 @@
   "paths": {
     "/news": {
       "get": {
-        "description": "",
+        "description": "Endpoint para listar todas as notícias cadastradas",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Lista de notícias enviada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/sucess_getAll"
+            } 
+          }, 
+          "500" : {
+            "description": "Ocorreu um erro interno ao buscar os alunos",
+            "schema": {
+              "$ref": "#/definitions/fail_500"
+            } 
+          }
+        }
       },
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Endpoint para cadastrar uma notícias",
+        "parameters": [
+          {
+            "name": "news",
+            "in": "body",
+            "description": "Dados a serem enviados.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/news"
+            } 
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Notícia cadastrada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/success_created"
+            }
+          },
+          "500" : {
+            "description": "Ocorreu um erro interno ao cadastrar os alunos",
+            "schema": {
+              "$ref": "#/definitions/fail_500"
+            } 
+          }
+        }
       }
     },
     "/news/{id}": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Endpoint para buscar pelo id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notícia enviada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/news"
+            } 
+          }, 
+          "500" : {
+            "description": "Ocorreu um erro interno ao buscar a notícia",
+            "schema": {
+              "$ref": "#/definitions/fail_500"
+            } 
+          }
+        }
       },
       "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Endpoint para atualizar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "news",
+            "in": "body",
+            "description": "Dados a serem enviados.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/news"
+            } 
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Notícia atualizada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/success_created"
+            }
+          },
+          "500" : {
+            "description": "Ocorreu um erro interno ao cadastrar os alunos",
+            "schema": {
+              "$ref": "#/definitions/fail_500"
+            } 
+          }
+        }
       },
       "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Endpoint para excluir",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notícia excluída com sucesso"
+          }, 
+          "500" : {
+            "description": "Ocorreu um erro interno ao buscar a notícia",
+            "schema": {
+              "$ref": "#/definitions/fail_500"
+            } 
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "sucess_getAll": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "number",
+          "example": 200
+        },
+        "news": {
+          "type": "array",
+          "example": []
+        }
+      }
+    },
+    "news": {
+      "type": "object",
+      "properties": {
+        "hat": {
+          "type": "string",
+          "example": "Ano de 2018 ficará marcado pelo sucesso dos atletas."
+        },
+        "title": {
+          "type": "string", 
+          "example": "Com título de Medina e 11 na elite."
+        },
+        "text": {
+          "type": "string", 
+          "example": "A tempestade brasileira no surfe mostrou que não é passageira."
+        },
+        "author": {
+          "type": "string", 
+          "example": "Da Redação, com Estadão Conteúdo"
+        },
+        "img": {
+          "type": "string", 
+          "example": "http://imagem.com.br/f_446243.jpg"
+        },
+        "link": {
+          "type": "string", 
+          "example": "ttps://esporte.uol.com.br/noticia/100000944120/com-bi-de-medina-e-11-na-elite-brazilian-storm-veio-para-ficar.html"
+        },
+        "active": {
+          "type": "boolean", 
+          "example": true
+        }
+      }
+    },
+
+    "success_created": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "number",
+          "example": 200
+        },
+        "aluno": {
+          "type": "object",
+          "example": {
+            "$ref": "#/definitions/news"
+          } 
+        }
+      }
+    },
+
+    "fail_500": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "number",
+          "example": 500
+        },
+        "error": {
+          "type": "string"
+        }
       }
     }
   }
